@@ -1,0 +1,11 @@
+.DS_Store
+sftp-config.json
+deployment-config.json
+.ruby-gemset
+.ruby-version
+*.sublime-workspace
+*.sublime-project
+.svn
+*~
+*.swp
+*.rbc

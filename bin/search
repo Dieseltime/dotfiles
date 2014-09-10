@@ -1,0 +1,16 @@
+#!/bin/sh
+#
+# Quick search in a directory for a string ($1).
+#
+set -e
+
+# use -iru to search directories ack usually ignores (like .git)
+if [ -x /usr/local/bin/ag ]; then
+  ag $1
+elif [ -x /usr/bin/ack-grep ]; then
+  ack-grep -i $1
+elif [ -x /usr/local/bin/ack ]; then
+  ack -i $1
+else
+  grep -i $1
+fi

@@ -1,0 +1,5 @@
+alias gd="git diff --color --ignore-all-space"
+alias gl="git_log_pretty"
+alias gs="git status"
+alias gitundo="git reset --soft 'HEAD^'"
+alias installgit="install_git"
