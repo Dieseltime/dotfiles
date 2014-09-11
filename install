@@ -23,6 +23,6 @@ elif exists curl ; then
   fetch=$( curl -L -H "Cache-control: no-cache" $url > $file )
 fi
 
-$fetch && unzip $file && mv "./dotfiles-go" "$HOME/.dotfiles" && rm $file
+$fetch && unzip $file && rm -rf "$HOME/.dotfiles" && mv "./dotfiles-go" "$HOME/.dotfiles" && rm $file
 
 source $HOME/.dotfiles/script/bootstrap.sh
