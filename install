@@ -10,7 +10,7 @@ if ! exists unzip ; then
   if [ "$(uname -s)" == "Darwin" ] ; then
     brew install unzip
   else
-    sudo apt-get install unzip
+    sudo apt-get -y --force-yes install unzip
   fi
 fi
 

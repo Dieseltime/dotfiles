@@ -9,7 +9,7 @@ if ! which -s git ; then
     brew install git
   else
     sudo apt-get update
-    sudo apt-get install git
+    sudo apt-get -y --force-yes install git
   fi
 fi
 
