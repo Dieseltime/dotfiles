@@ -1,34 +1,39 @@
 #!/bin/bash
 
-# Make sure we’re using the latest Homebrew
 brew update
-
-# Upgrade any already-installed formulae
 brew upgrade
 
-# Install bash completion
-brew install bash-completion
-
-# Install GNU core utilities (those that come with OS X are outdated)
-brew install coreutils
-echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
-# Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
-brew install findutils
-# Install Bash 4
 brew install bash
+brew install bash-completion
+brew install coreutils          # GNU core utilities (those that come with OS X are outdated)
+brew install findutils          # GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
+brew install wget --enable-iri  # wget with internationalized URI (IRI) support
 
-# Install wget with IRI support
-brew install wget --enable-iri
-
-# Install more recent versions of some OS X tools
 brew tap homebrew/dupes
 brew install homebrew/dupes/grep
 
-# Install everything else
 brew install ack
-brew install git
+brew install binutils
+brew install diffutils
+brew install ed --default-names
+brew install findutils --default-names
+brew install gawk
+brew install gnu-indent --default-names
+brew install gnu-sed --default-names
+brew install gnu-tar --default-names
+brew install gnu-which --default-names
+brew install gnutls --default-names
+brew install grep --default-names
+brew install gzip
 brew install rename
+brew install screen
 brew install tree
+brew install watch
+brew install wdiff --with-gettext
+brew install wget
 
-# Remove outdated versions from the cellar
 brew cleanup
+
+if ! grep -q "PATH=\"/usr/local/opt/coreutils/libexec/gnubin:\$PATH\"" "${dotfiles_profile}" ; then
+  echo "PATH=\"/usr/local/opt/coreutils/libexec/gnubin:\$PATH\"" >> "${dotfiles_profile}"
+fi
