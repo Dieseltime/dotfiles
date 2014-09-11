@@ -14,7 +14,7 @@ if ! exists unzip ; then
   fi
 fi
 
-url="https://github.com/svanhess/dotfiles/archive/master.zip"
+url="https://github.com/Dieseltime/dotfiles/archive/go.zip"
 file="dotfiles.zip"
 
 if exists wget ; then
