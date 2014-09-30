@@ -47,8 +47,8 @@ if [ ! -s "$HOME/.gitignore" ]; then
   ln -nfs "$HOME/.dotfiles/git/.gitignore" "$HOME/.gitignore"
 fi
 
-if ! grep -q '[[ -s "${HOME}/.dotfiles/git/functions.sh" ]] && source "${HOME}/.dotfiles/git/functions.sh"' "$HOME/.bash_profile" ; then
-  echo '[[ -s "${HOME}/.dotfiles/git/functions.sh" ]] && source "${HOME}/.dotfiles/git/functions.sh"' >> "$HOME/.bash_profile"
+if ! grep -q '[[ -s "${HOME}/.dotfiles/git/functions.sh" ]] && source "${HOME}/.dotfiles/git/functions.sh"' "$HOME/.dotfiles/bash/.profile.sh" ; then
+  echo '[[ -s "${HOME}/.dotfiles/git/functions.sh" ]] && source "${HOME}/.dotfiles/git/functions.sh"' >> "$HOME/.dotfiles/bash/.profile.sh"
 fi
 
 if [ ! -s "$HOME/.ssh/id_rsa" ]; then

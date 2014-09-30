@@ -34,6 +34,8 @@ brew install wget
 
 brew cleanup
 
+dotfiles_profile="${HOME}/.dotfiles/bash/.profile.sh"
+
 if ! grep -q "PATH=\"/usr/local/opt/coreutils/libexec/gnubin:\$PATH\"" "${dotfiles_profile}" ; then
   echo "PATH=\"/usr/local/opt/coreutils/libexec/gnubin:\$PATH\"" >> "${dotfiles_profile}"
 fi

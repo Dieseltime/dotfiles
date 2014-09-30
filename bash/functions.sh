@@ -55,3 +55,10 @@ clean_home () {
 rsyslog () {
   ssh $1 sudo tail -f /var/log/syslog
 }
+
+mecopy () {
+  read result
+  echo $result
+  echo $result | tr -d '\n' | pbcopy
+  echo "Copied to clipboard!"
+}

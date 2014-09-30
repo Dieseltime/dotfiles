@@ -20,32 +20,10 @@ done
 unalias -a
 
 ## ALIASES
-alias ..="cd .."
-alias ...="cd ../.."
-alias  ~="cd ~"
-alias  l="ll"
-alias cleargems="deletegems"
-alias installrbenv="install_rbenv"
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias list="declare -f"
-alias removegems="deletegems"
-alias syslog="sudo tail -f /var/log/syslog"
-alias sourceit="reload_profile"
-alias updategit="update_git"
-alias dotfiles="e $HOME/.dotfiles"
-alias vip="ifconfig | grep -A1 utun0 | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*'"
-
-source $HOME/.dotfiles/git/.aliases
-
-if [ "$(uname -s)" == "Darwin" ]
-then
-  alias ll="ls -AGlvh"
-  alias localip="ipconfig getifaddr en0 | ipconfig getifaddr en1"
-else
-  alias hostname="hostname --long"
-  alias ll="ls -Alvh --color"
-  alias localip="ip addr show eth0"
-fi
+for aliases in `find $HOME/.dotfiles -maxdepth 2 -name .aliases`
+do
+  source $aliases
+done
 
 if command -v gem >/dev/null 2>&1; then
   alias deletegems="for i in `gem list --no-versions`; do gem uninstall -aIx $i; done"
@@ -116,17 +94,10 @@ fi
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 ## FUNCTIONS
-[[ -s "$HOME/.dotfiles/bash/functions.sh" ]] && source "$HOME/.dotfiles/bash/functions.sh"
-[[ -s "$HOME/.dotfiles/bundler/functions.sh" ]] && source "$HOME/.dotfiles/bundler/functions.sh"
-[[ -s "$HOME/.dotfiles/git/functions.sh" ]] && source "$HOME/.dotfiles/git/functions.sh"
-[[ -s "$HOME/.dotfiles/ruby/functions.sh" ]] && source "$HOME/.dotfiles/ruby/functions.sh"
-[[ -s "$HOME/.dotfiles/ssh/functions.sh" ]] && source "$HOME/.dotfiles/ssh/functions.sh"
-
-
-[[ -s "$HOME//Users/svanhess/.dotfiles/bash/functions.sh" ]] && source "$HOME//Users/svanhess/.dotfiles/bash/functions.sh"
-[[ -s "$HOME//Users/svanhess/.dotfiles/bundler/functions.sh" ]] && source "$HOME//Users/svanhess/.dotfiles/bundler/functions.sh"
-[[ -s "$HOME//Users/svanhess/.dotfiles/git/functions.sh" ]] && source "$HOME//Users/svanhess/.dotfiles/git/functions.sh"
-[[ -s "$HOME//Users/svanhess/.dotfiles/ruby/functions.sh" ]] && source "$HOME//Users/svanhess/.dotfiles/ruby/functions.sh"
-[[ -s "$HOME//Users/svanhess/.dotfiles/ssh/functions.sh" ]] && source "$HOME//Users/svanhess/.dotfiles/ssh/functions.sh"
+for functions in `find $HOME/.dotfiles -maxdepth 2 -name functions.sh`
+do
+  source $functions
+done
 
 export PATH="./bin:~/bin:/usr/local/bin:/opt/chefdk/bin:$HOME/.chefdk/gem/ruby/2.1.0/bin:$PATH"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"

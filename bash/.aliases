@@ -1,0 +1,29 @@
+alias ..="cd .."
+alias ...="cd ../.."
+alias  ~="cd ~"
+alias  l="ll"
+alias cleargems="deletegems"
+alias installrbenv="install_rbenv"
+alias eip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias list="declare -f"
+alias removegems="deletegems"
+alias syslog="sudo tail -f /var/log/syslog"
+alias sourceit="reload_profile"
+alias updategit="update_git"
+alias dotfiles="e $HOME/.dotfiles"
+alias vip="ifconfig | grep -A1 utun0 | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | mecopy"
+alias vpn="vip"
+alias mounted="df -P file/goes/here | tail -1 | cut -d' ' -f 1"
+
+if [ "$(uname -s)" == "Darwin" ]
+then
+  alias ll="ls -AGlvh"
+  alias ip="echo $(ipconfig getifaddr en0 || ipconfig getifaddr en1) | mecopy"
+else
+  alias hostname="hostname --long"
+  alias ll="ls -Alvh --color"
+  alias ip="ip addr show eth0"
+
+  alias pbcopy="xsel --clipboard --input"
+  alias pbpaste="xsel --clipboard --output"
+fi
