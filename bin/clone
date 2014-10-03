@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+##
+# Clones a git repo that matches the command line argument
+# If an exact match isn't found, we will search the
+# git server for a matching repository
+
+if [ $# -eq 0 ] ; then echo "You need to specify a project name"; exit; fi
+
+GIT_SERVER='git@git.internal.g2llc.com'
+GITOSIS_UI='http://git.internal.g2llc.com'
+QUERY=$1
+
+shift
+
+git clone $GIT_SERVER:$( echo $QUERY | sed -e 's/.git$//').git $@
+
+result=$?
+
+if [ $result -ne 0 ]; then
+
+  printf "\nSearching $GITOSIS_UI for \"$QUERY\" ...\n\n"
+
+  urls=$( curl $GITOSIS_UI \
+    | grep -o -E 'href="([^"#]+)"' \
+    | grep $QUERY \
+    | cut -d'"' -f2 \
+    | cut -d'=' -f2 \
+    | cut -d';' -f1 \
+    | uniq)
+
+  projects=($urls)
+  length=${#projects[@]}
+
+  if [ "$length" -eq "1" ]; then
+
+    git clone $GIT_SERVER:${projects[0]} $@
+
+  elif [ "$length" -gt "1" ]; then
+
+    printf "\n"
+    for i in "${!projects[@]}"; do
+      printf "  %s\t%s\n" "$((i+1))" "${projects[$i]}"
+    done
+
+    printf "\n  [ \033[0;33m?\033[0m ] - Which project would you like to clone? "
+    read -e project_id
+
+    printf "\n"
+    git clone "$GIT_SERVER:${projects[$((project_id-1))]}"
+  else
+    printf "Couldn't find a match"
+  fi
+
+fi

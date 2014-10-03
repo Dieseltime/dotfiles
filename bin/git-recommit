@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# After doing a git-undo, redo the commit by starting with its log message
+
+git commit -c ORIG_HEAD
