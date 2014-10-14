@@ -16,18 +16,24 @@ projects = Dir.entries(ENV['PROJECTS_DIR']).select { |entry|
   File.directory? File.join(ENV['PROJECTS_DIR'], entry) and !(entry =='.' || entry == '..' || entry.start_with?('_'))
 }
 
-open(File.join(File.expand_path('~'), '.atom/projects.cson'), 'w') { |f|
-  projects.each do |project|
+project_config_path = File.join(File.expand_path('~'), '.atom/projects.cson')
 
-    project_config = <<-EOF
-'#{project}':
-  'title': '#{project}'
-  'paths': [
-    '#{File.join(ENV['PROJECTS_DIR'], project)}'
-  ]
-EOF
-    f.puts project_config
-  end
-}
+if File.exist?(project_config_path)
 
-puts "Generated configs for #{projects.size} projects."
+  open(File.join(File.expand_path('~'), '.atom/projects.cson'), 'w') { |f|
+    projects.each do |project|
+
+      project_config = <<-EOF
+  '#{project}':
+    'title': '#{project}'
+    'paths': [
+      '#{File.join(ENV['PROJECTS_DIR'], project)}'
+    ]
+  EOF
+      f.puts project_config
+    end
+  }
+
+  puts "Generated configs for #{projects.size} projects."
+  
+end

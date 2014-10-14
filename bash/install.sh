@@ -15,4 +15,15 @@ if [ "$(uname -s)" == "Darwin" ]
 then
   DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
   source "$DIR/.brew"
+else
+  sudo apt-get -y --force-yes install python-pip
+  sudo pip install mackup
+fi
+
+# Install Dropbox
+if [ "$(uname -s)" == "Darwin" ]
+then
+  brew cask install dropbox
+else
+  cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 fi

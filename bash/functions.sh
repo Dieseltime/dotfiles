@@ -62,3 +62,17 @@ mecopy () {
   echo $result | tr -d '\n' | pbcopy
   echo "Copied to clipboard!"
 }
+
+##
+# Flatten a directory structure
+#
+# Example:
+#
+#   flatten /foo
+#
+# Which will create /foo-flattened
+flatten () {
+  target=${1%/}-flattened
+  mkdir -p $target
+  find $1 -exec cp \{\} $target \;
+}

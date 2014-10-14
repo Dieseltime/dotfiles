@@ -15,6 +15,12 @@ install_rbenv () {
     echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
   fi
 
+  # Ruby build
+  git clone https://github.com/sstephenson/ruby-build.git $HOME/.rbenv/plugins/ruby-build
+
+  # Auto rehash
+  git clone https://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
+  
   sourceit
 }
 

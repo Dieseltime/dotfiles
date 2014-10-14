@@ -66,6 +66,12 @@ export HISTTIMEFORMAT
 # Make some commands not show up in history
 export HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help"
 
+# AWS
+export JAVA_HOME=`/usr/libexec/java_home`
+export EC2_HOME=$HOME/bin/ec2
+source $HOME/.ssh/ec2-credentials >/dev/null 2>&1
+export EC2_URL=https://ec2.us-west-1.amazonaws.com
+
 ## BASH COMPLETION
 [[ -s /etc/bash_completion ]] && source /etc/bash_completion
 [[ -s /usr/local/etc/bash_completion ]] && source /usr/local/etc/bash_completion
@@ -99,5 +105,6 @@ do
   source $functions
 done
 
-export PATH="./bin:~/bin:/usr/local/bin:/opt/chefdk/bin:$HOME/.chefdk/gem/ruby/2.1.0/bin:$PATH"
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="$PATH:$EC2_HOME/bin"
+export PATH="~/bin:/usr/local/bin:/opt/chefdk/bin:$HOME/.chefdk/gem/ruby/2.1.0/bin:$PATH"

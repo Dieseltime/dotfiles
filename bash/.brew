@@ -32,6 +32,8 @@ brew install watch
 brew install wdiff --with-gettext
 brew install wget
 
+brew install mackup # Configuration file backup/restore
+
 brew cleanup
 
 dotfiles_profile="${HOME}/.dotfiles/bash/.profile.sh"

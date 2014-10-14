@@ -18,7 +18,7 @@ alias mounted="df -P file/goes/here | tail -1 | cut -d' ' -f 1"
 if [ "$(uname -s)" == "Darwin" ]
 then
   alias ll="ls -AGlvh"
-  alias ip="echo $(ipconfig getifaddr en0 || ipconfig getifaddr en1) | mecopy"
+  alias ip="echo $(ipconfig getifaddr en1 || ipconfig getifaddr en0) | mecopy"
 else
   alias hostname="hostname --long"
   alias ll="ls -Alvh --color"
