@@ -67,7 +67,7 @@ export HISTTIMEFORMAT
 export HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help"
 
 # AWS
-export JAVA_HOME=`/usr/libexec/java_home`
+export JAVA_HOME=`/usr/libexec/java_home 2>&1`
 export EC2_HOME=$HOME/bin/ec2
 source $HOME/.ssh/ec2-credentials >/dev/null 2>&1
 export EC2_URL=https://ec2.us-west-1.amazonaws.com
