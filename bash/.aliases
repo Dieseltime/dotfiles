@@ -1,29 +1,46 @@
-alias ..="cd .."
-alias ...="cd ../.."
-alias  ~="cd ~"
 alias  l="ll"
+alias  ~="cd ~"
+alias ...="cd ../.."
+alias ..="cd .."
+alias c="clear"
 alias cleargems="deletegems"
-alias installrbenv="install_rbenv"
-alias eip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias list="declare -f"
-alias removegems="deletegems"
-alias syslog="sudo tail -f /var/log/syslog"
-alias sourceit="reload_profile"
-alias updategit="update_git"
+alias diff="colordiff"
 alias dotfiles="e $HOME/.dotfiles"
-alias vip="ifconfig | grep -A1 utun0 | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | mecopy"
+alias eip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias grep="grep --color=auto"
+alias installrbenv="install_rbenv"
+alias list="declare -f"
+alias ll="ls -Alvh --color"
+alias mkdir="mkdir -pv"
+alias path="echo -e ${PATH//:/\\n}"
+alias removegems="deletegems"
+alias sourceit="reload_profile"
+alias syslog="sudo tail -f /var/log/syslog"
+alias updategit="update_git"
 alias vpn="vip"
-alias mounted="df -P file/goes/here | tail -1 | cut -d' ' -f 1"
 
 if [ "$(uname -s)" == "Darwin" ]
 then
-  alias ll="ls -AGlvh"
-  alias ip="echo $(ipconfig getifaddr en1 || ipconfig getifaddr en0) | mecopy"
+  ip () {
+    echo $(ipconfig getifaddr en1 || ipconfig getifaddr en0) | mecopy
+  }
 else
-  alias hostname="hostname --long"
-  alias ll="ls -Alvh --color"
-  alias ip="ip addr show eth0"
+  hostname () {
+    hostname --long
+  }
+
+  ip () {
+    echo ip addr show eth0 | mecopy
+  }
 
   alias pbcopy="xsel --clipboard --input"
   alias pbpaste="xsel --clipboard --output"
 fi
+
+vip () {
+  ifconfig | \
+  grep -A1 utun | \
+  grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | \
+  grep -Eo '([0-9]*\.){3}[0-9]*' | \
+  mecopy
+}

@@ -1,2 +1,4 @@
 Host *
   StrictHostKeyChecking no
+  ForwardAgent true
+  LocalCommand /Users/svanhess/bin/fix-ssh %h

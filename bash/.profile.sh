@@ -108,6 +108,15 @@ do
   source $functions
 done
 
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-export PATH="$PATH:$EC2_HOME/bin"
-export PATH="~/bin:/usr/local/bin:/opt/chefdk/bin:$HOME/.chefdk/gem/ruby/2.1.0/bin:$PATH"
+## Z
+source $HOME/bin/z.sh
+
+export MANPATH="#{opt_libexec}/gnuman:$MANPATH"
+
+export PATH="/Users/svanhess/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" # GNU coreutils
+export PATH="$HOME/bin:$PATH"                               # Custom binaries
+export PATH="/usr/local/bin:$PATH"                          # Homebrew
+export PATH="/opt/chefdk/bin:$PATH"                         # Chef
+export PATH="$HOME/.chefdk/gem/ruby/2.1.0/bin:$PATH"        # Chef embedded ruby
+export PATH="$PATH:$EC2_HOME/bin"                           # AWS EC2 binaries

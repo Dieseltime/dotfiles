@@ -1,5 +1,7 @@
 alias gd="git diff --color --ignore-all-space"
+alias gdc="gd --cached"
 alias gl="git_log_pretty"
 alias gs="git status"
-alias gitundo="git reset --soft 'HEAD^'"
 alias installgit="install_git"
+alias gb="git branchdate"
+alias gc="git commit -m"

@@ -20,7 +20,7 @@ install_rbenv () {
 
   # Auto rehash
   git clone https://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
-  
+
   sourceit
 }
 
@@ -73,4 +73,8 @@ migrate () {
   done
 
   cd $working_dir
+}
+
+kill_passenger () {
+  ps aux | grep -i passenger | grep 'master\|worker' | awk '{ system("sudo kill -9 " $2) }'
 }
