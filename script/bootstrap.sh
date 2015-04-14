@@ -2,6 +2,8 @@
 
 dotfiles_profile="${HOME}/.dotfiles/bash/.profile.sh"
 
+touch "$HOME/.bash_profile"
+
 # Load Functions
 for functions in `find $HOME/.dotfiles -maxdepth 2 -name functions.sh`
 do
