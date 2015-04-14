@@ -4,7 +4,7 @@ user () {
   printf "\n  [ \033[0;33m?\033[0m ] $1 \n\n"
 }
 
-if ! which -s git ; then
+if ! which git >/dev/null 2>&1; then
   if [ $ARCH == "Darwin" ] ; then
     brew install git
   else
