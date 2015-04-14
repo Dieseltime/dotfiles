@@ -5,7 +5,8 @@ user () {
 }
 
 if ! which git >/dev/null 2>&1; then
-  if [ $ARCH == "Darwin" ] ; then
+  unamestr=`uname`
+  if [[ "$unamestr" == 'Darwin' ]]; then
     brew install git
   else
     sudo apt-get update

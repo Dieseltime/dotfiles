@@ -111,7 +111,7 @@ do
 done
 
 ## Z
-source $HOME/bin/z.sh
+source $HOME/bin/z.sh >/dev/null 2>&1
 
 ## HUB
 eval "$(hub alias -s)"
