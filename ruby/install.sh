@@ -16,8 +16,6 @@ if ! grep -q 'eval "$(rbenv init -)"' "$HOME/.bash_profile"; then
   echo 'eval "$(rbenv init -)"' >> "$HOME/.bash_profile"
 fi
 
-exec $SHELL
-
 if [ -d ~/.rbenv/plugins/ruby-build ]; then
   git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 fi
