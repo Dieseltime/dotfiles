@@ -8,12 +8,12 @@ if [ -d ~/.rbenv ]; then
   git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
 fi
 
-if ! grep -q "export PATH=\"$HOME/.rbenv/bin:$PATH\"" "~/.bash_profile"; then
-  echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
+if ! grep -q "export PATH=\"$HOME/.rbenv/bin:$PATH\"" "$HOME/.bash_profile"; then
+  echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> "$HOME/.bash_profile"
 fi
 
-if ! grep -q "eval \"$(rbenv init -)\"" "~/.bash_profile"; then
-  echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+if ! grep -q "eval \"$(rbenv init -)\"" "$HOME/.bash_profile"; then
+  echo 'eval "$(rbenv init -)"' >> "$HOME/.bash_profile"
 fi
 
 exec $SHELL
