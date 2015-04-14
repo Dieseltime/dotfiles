@@ -37,7 +37,7 @@ if ! [ -f $HOME/.dotfiles/git/.gitconfig ]; then
   current_authorname=`git config user.name`
   current_authoremail=`git config user.email`
 
-  read -p "  What is your github author name? [$cur_authorname]" git_authorname < /dev/tty
+  read -p "  What is your github author name? [$current_authorname]" git_authorname < /dev/tty
   git_authorname=${git_authorname:-$current_authorname}
 
   read -p "  What is your github author email? [current_authoremail]" git_authoremail < /dev/tty
