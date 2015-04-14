@@ -20,6 +20,8 @@ if ! [ -d "$HOME/.rbenv/plugins/ruby-build" ]; then
   git clone git://github.com/sstephenson/ruby-build.git "$HOME/.rbenv/plugins/ruby-build"
 fi
 
+. "$HOME/.bash_profile"
+
 rbenv install 2.1.3
 rbenv global 2.1.3
 
