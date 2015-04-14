@@ -40,7 +40,7 @@ if ! [ -f $HOME/.dotfiles/git/.gitconfig ]; then
   read -p "  What is your github author name? [$current_authorname]" git_authorname < /dev/tty
   git_authorname=${git_authorname:-$current_authorname}
 
-  read -p "  What is your github author email? [current_authoremail]" git_authoremail < /dev/tty
+  read -p "  What is your github author email? [$current_authoremail]" git_authoremail < /dev/tty
   git_authoremail=${git_authoremail:-$current_authoremail}
 
   sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" $HOME/.dotfiles/git/.gitconfig.sample > $HOME/.dotfiles/git/.gitconfig
