@@ -12,7 +12,7 @@ if ! grep -q "export PATH=\"$HOME/.rbenv/bin:$PATH\"" "$HOME/.bash_profile"; the
   echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> "$HOME/.bash_profile"
 fi
 
-if ! grep -q "eval \"$(rbenv init -)\"" "$HOME/.bash_profile"; then
+if ! grep -q 'eval "$(rbenv init -)"' "$HOME/.bash_profile"; then
   echo 'eval "$(rbenv init -)"' >> "$HOME/.bash_profile"
 fi
 
