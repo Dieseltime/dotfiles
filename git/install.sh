@@ -46,9 +46,9 @@ if ! [ -f $HOME/.dotfiles/git/.gitconfig ]; then
   git_authorname=${git_authorname:-$current_authorname}
 
   if [ "$current_authoremail" == "" ]; then
-    prompt="  What is your github author name? " 
+    prompt="  What is your github author email? " 
   else
-    prompt="  What is your github author name? [ $current_authoremail ] "
+    prompt="  What is your github author email? [ $current_authoremail ] "
   fi
   read -p "$prompt" git_authoremail < /dev/tty
   git_authoremail=${git_authoremail:-$current_authoremail}
