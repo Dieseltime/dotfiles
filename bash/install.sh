@@ -12,7 +12,7 @@ fi
 touch "$HOME/.hushlogin"
 
 if ! which brew >/dev/null 2>&1; then
-	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" </dev/null
 fi
 
 if [ "$(uname -s)" == "Darwin" ]
