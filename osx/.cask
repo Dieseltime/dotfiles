@@ -1,0 +1,24 @@
+brew install caskroom/cask/brew-cask
+
+brew cask install airmail-amt
+brew cask install angry-ip-scanner
+brew cask install bartender
+brew cask install boot2docker
+brew cask install chromecast
+brew cask install colorpicker
+brew cask install colorpicker-hex
+brew cask install crashplan
+brew cask install daisydisk
+brew cask install dash
+brew cask install dropbox
+brew cask install filebot
+brew cask install fing
+brew cask install firefox
+brew cask install flowdock
+brew cask install iterm2
+brew cask install kodi
+brew cask install lastpass
+brew cask install lunchy
+
+
+brew cask install google-chrome

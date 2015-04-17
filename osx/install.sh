@@ -452,6 +452,9 @@ defaults write com.apple.ActivityMonitor SortDirection -int 0
 ###############################################################################
 
 for app in "Activity Monitor" "cfprefsd" "Dock" "Finder" "SystemUIServer"; do
-	killall "${app}" > /dev/null 2>&1
+  killall "${app}" > /dev/null 2>&1
 done
-echo "Done. Note that some of these changes require a logout/restart to take effect."
+
+# Homebrew Cask
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "$dir/.cask"

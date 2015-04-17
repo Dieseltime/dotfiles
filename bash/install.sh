@@ -12,7 +12,7 @@ fi
 touch "$HOME/.hushlogin"
 
 if ! which brew >/dev/null 2>&1; then
-	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" </dev/null
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" </dev/null
 fi
 
 if [ "$(uname -s)" == "Darwin" ]
@@ -31,3 +31,5 @@ then
 else
   cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 fi
+
+sudo pip install thefuck
