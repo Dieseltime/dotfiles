@@ -7,6 +7,11 @@
 
 if [ $# -eq 0 ] ; then echo "You need to specify a project name"; exit; fi
 
+if [[ $1 == *"github"* ]]; then
+  git clone $@
+  exit;
+fi
+
 GIT_SERVER='git@git.internal.g2llc.com'
 GITOSIS_UI='http://git.internal.g2llc.com'
 QUERY=$1
@@ -49,7 +54,7 @@ if [ $result -ne 0 ]; then
     printf "\n"
     git clone "$GIT_SERVER:${projects[$((project_id-1))]}"
   else
-    printf "Couldn't find a match"
+    printf "Couldn't find a match\n"
   fi
 
 fi

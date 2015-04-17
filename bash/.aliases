@@ -11,7 +11,6 @@ alias grep="grep --color=auto"
 alias installrbenv="install_rbenv"
 alias list="declare -f"
 alias ll="ls -Alvh --color"
-alias mkdir="mkdir -pv"
 alias path="echo -e ${PATH//:/\\n}"
 alias removegems="deletegems"
 alias sourceit="reload_profile"
@@ -22,7 +21,7 @@ alias vpn="vip"
 if [ "$(uname -s)" == "Darwin" ]
 then
   ip () {
-    echo $(ipconfig getifaddr en1 || ipconfig getifaddr en0) | mecopy
+    echo $(ipconfig getifaddr en1 || ipconfig getifaddr en0) | cpy
   }
 else
   hostname () {
@@ -42,5 +41,5 @@ vip () {
   grep -A1 utun | \
   grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | \
   grep -Eo '([0-9]*\.){3}[0-9]*' | \
-  mecopy
+  cpy
 }

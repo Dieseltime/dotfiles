@@ -56,11 +56,41 @@ rsyslog () {
   ssh $1 sudo tail -f /var/log/syslog
 }
 
-mecopy () {
-  read result
-  echo $result
-  echo $result | tr -d '\n' | pbcopy
-  echo "Copied to clipboard!"
+# Copy string or contents of a file to the clipboard
+# Can also accept input from a pipe
+#
+# Examples:
+#
+#   echo "Tyler Durden" | cpy
+#   cpy /path/to/file.txt
+#
+cpy () {
+
+  if [ $# -eq 0 ]; then
+    read result
+  else
+    result=$1
+  fi
+
+  if [ -f $result ]; then
+    content=`cat $result`
+  else
+    content=$result
+  fi
+
+  if [ ! -z $content ]; then
+    echo $content
+    echo $content | tr -d '\n' | pbcopy
+    echo "Copied to clipboard!"
+  else
+    echo "${FUNCNAME[0]}: no content supplied"; exit 1;
+  fi
+}
+
+# Create a directory and cd into it
+mkdir() {
+  command mkdir -pv "$@"
+  cd $_
 }
 
 ##

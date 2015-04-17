@@ -25,3 +25,11 @@ setup_ssh_config () {
     done
   fi
 }
+
+screen_ssh() {
+  numargs=$#
+  screen -t ${!numargs} ssh $@
+}
+if [ $TERM == "screen" -o $TERM == "screen.linux" ]; then
+  alias ssh=screen_ssh
+fi

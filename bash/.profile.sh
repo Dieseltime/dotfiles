@@ -57,7 +57,7 @@ export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 export DOCKER_HOST=tcp://$(boot2docker ip 2>/dev/null):2375
 
 # Editor
-export EDITOR=$(which atom || which vim)
+export EDITOR='/Users/svanhess/bin/subl'
 
 # Timestamps for bash history
 HISTTIMEFORMAT='%F %T '
@@ -93,14 +93,16 @@ GIT_PS1_DESCRIBE_STYLE="branch"
 GIT_PS1_SHOWUPSTREAM="auto git"
 
 if command -v __git_ps1 >/dev/null 2>&1; then
-  PS1="\W\$(__git_ps1 \" (%s)\")\$ "
+  PS1="🔱  \W\$(__git_ps1 \" (%s)\")\$ "
+else
+  PS1="🔱  \W\$ "
 fi
 
 ## RBENV
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 ## DIRENV
-if which direnv > /dev/null; then eval "$(direnv hook $0)"; fi
+if which direnv > /dev/null; then eval "$(direnv hook /usr/local/bin/bash)"; fi
 
 ## FUNCTIONS
 for functions in `find $HOME/.dotfiles -maxdepth 2 -name functions.sh`
@@ -111,12 +113,13 @@ done
 ## Z
 source $HOME/bin/z.sh
 
+## HUB
+eval "$(hub alias -s)"
+
 export MANPATH="#{opt_libexec}/gnuman:$MANPATH"
 
 export PATH="/Users/svanhess/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin"
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" # GNU coreutils
-export PATH="$HOME/bin:$PATH"                               # Custom binaries
+export PATH="/usr/local/sbin:$PATH"                         # Homebrew
 export PATH="/usr/local/bin:$PATH"                          # Homebrew
-export PATH="/opt/chefdk/bin:$PATH"                         # Chef
-export PATH="$HOME/.chefdk/gem/ruby/2.1.0/bin:$PATH"        # Chef embedded ruby
-export PATH="$PATH:$EC2_HOME/bin"                           # AWS EC2 binaries
+export PATH="$HOME/bin:$PATH"                               # Custom binaries
