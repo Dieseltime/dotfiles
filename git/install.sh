@@ -26,32 +26,10 @@ if [ ! -s $git_prompt_path ]; then
 fi
 
 if ! [ -f $HOME/.dotfiles/git/.gitconfig ]; then
-
   git_credential='cache'
   if [ "$(uname -s)" == "Darwin" ]; then
     git_credential='osxkeychain'
   fi
-
-  user "Lets set up your git config"
-  
-  current_authorname=`git config user.name`
-  current_authoremail=`git config user.email`
-
-  if [ "$current_authorname" == "" ]; then
-    prompt="  What is your github author name? " 
-  else
-    prompt="  What is your github author name? [ $current_authorname ] "
-  fi
-  read -p "$prompt" git_authorname < /dev/tty
-  git_authorname=${git_authorname:-$current_authorname}
-
-  if [ "$current_authoremail" == "" ]; then
-    prompt="  What is your github author email? " 
-  else
-    prompt="  What is your github author email? [ $current_authoremail ] "
-  fi
-  read -p "$prompt" git_authoremail < /dev/tty
-  git_authoremail=${git_authoremail:-$current_authoremail}
 
   sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" $HOME/.dotfiles/git/.gitconfig.sample > $HOME/.dotfiles/git/.gitconfig
 fi

@@ -1,20 +1,20 @@
 [user]
-	name = AUTHORNAME
-	email = AUTHOREMAIL
+	name = Scott Van Hess
+	email = vanhess@gmail.com
 [apply]
-  whitespace = nowarn
+    whitespace = nowarn
 [color]
-  diff = auto
-  status = auto
-  branch = auto
-  ui = true
+    diff = auto
+    status = auto
+    branch = auto
+    ui = true
 [core]
 	excludesfile = ~/.gitignore
-  editor = vim
+    editor = vim
 [credential]
-  helper = GIT_CREDENTIAL_HELPER
+    helper = GIT_CREDENTIAL_HELPER
 [help]
-  autocorrect = 1
+    autocorrect = 1
 [mergetool]
 	keepBackup = false
 [alias]
