@@ -30,7 +30,7 @@ elif exists curl ; then
 fi
 
 ohai "Downloading dotfiles and extracting ..."
-$fetch && unzip $file && rm -rf "$HOME/.dotfiles" && mv "./dotfiles-go" "$HOME/.dotfiles" && rm $file
+$fetch && unzip -q $file && rm -rf "$HOME/.dotfiles" && mv "./dotfiles-go" "$HOME/.dotfiles" && rm $file
 
 ohai "Bootstrapping ..."
 source $HOME/.dotfiles/script/bootstrap.sh
