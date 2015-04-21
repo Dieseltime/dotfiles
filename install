@@ -6,6 +6,12 @@ exists () {
   command -v "$1" &>/dev/null ;
 }
 
+ohai () {
+  green='\033[0;32m'
+  NC='\033[0m'
+  echo -e "${green}$1${NC}"
+}
+
 if ! exists unzip ; then
   if [ "$(uname -s)" == "Darwin" ] ; then
     brew install unzip
@@ -18,11 +24,13 @@ url="https://github.com/Dieseltime/dotfiles/archive/go.zip"
 file="dotfiles.zip"
 
 if exists wget ; then
-  fetch=$( wget --no-cache $url -O $file )
+  fetch=$( wget --quiet --no-cache $url -O $file )
 elif exists curl ; then
-  fetch=$( curl -L -H "Cache-control: no-cache" $url > $file )
+  fetch=$( curl --silent -L -H "Cache-control: no-cache" $url > $file )
 fi
 
+ohai "Downloading dotfiles and extracting ..."
 $fetch && unzip $file && rm -rf "$HOME/.dotfiles" && mv "./dotfiles-go" "$HOME/.dotfiles" && rm $file
 
+ohai "Bootstrapping ..."
 source $HOME/.dotfiles/script/bootstrap.sh
