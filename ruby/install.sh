@@ -22,8 +22,13 @@ fi
 
 . "$HOME/.bash_profile"
 
-rbenv install 2.1.3
-rbenv global 2.1.3
+latest_ruby=$(rbenv install -l | grep -E '^\s+[0-9]' | sort -n | tail -1 | sed -e 's/^[[:space:]]*//')
+current_ruby=$(ruby -e 'print RUBY_VERSION')
+
+if [ "$latest_ruby" != "$current_ruby" ]; then
+  rbenv install $latest_ruby
+  rbenv global $latest_ruby
+end
 
 if ! grep -q "gem: --no-ri --no-rdoc"; then
   echo "gem: --no-ri --no-rdoc" > ~/.gemrc

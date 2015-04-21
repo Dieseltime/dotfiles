@@ -24,6 +24,8 @@ else
   sudo pip install mackup
 fi
 
+ln -nfs "$HOME/.dotfiles/bash/.inputrc" "$HOME/.inputrc"
+
 # Install Dropbox
 if [ "$(uname -s)" == "Darwin" ]
 then
