@@ -15,11 +15,7 @@ if ! which brew >/dev/null 2>&1; then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" </dev/null
 fi
 
-if [ "$(uname -s)" == "Darwin" ]
-then
-  DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-  source "$DIR/.brew"
-else
+if [ "$(uname -s)" == "Linux" ]; then
   sudo apt-get -y --force-yes install python-pip
   sudo pip install mackup
 fi

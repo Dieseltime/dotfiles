@@ -28,7 +28,7 @@ current_ruby=$(ruby -e 'print RUBY_VERSION')
 if [ "$latest_ruby" != "$current_ruby" ]; then
   rbenv install $latest_ruby
   rbenv global $latest_ruby
-end
+fi
 
 if ! grep -q "gem: --no-ri --no-rdoc"; then
   echo "gem: --no-ri --no-rdoc" > ~/.gemrc

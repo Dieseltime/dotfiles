@@ -4,7 +4,7 @@
 
 brew_install () {
   if [[ -n $(brew ls --versions $1) ]]; then
-    echo "$1 Already installed"
+    echo "Already installed: $1"
   else
     brew install $@
   fi
