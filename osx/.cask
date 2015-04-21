@@ -1,3 +1,6 @@
+echo "Installing applications via homebrew cask ..."
+
+brew update && brew upgrade brew-cask && brew cleanup && brew cask cleanup
 brew install caskroom/cask/brew-cask
 
 brew cask install airmail-amt

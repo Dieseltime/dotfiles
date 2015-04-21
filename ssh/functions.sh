@@ -26,10 +26,12 @@ setup_ssh_config () {
   fi
 }
 
-screen_ssh() {
+screen_ssh () {
   numargs=$#
   screen -t ${!numargs} ssh $@
 }
-if [ $TERM == "screen" -o $TERM == "screen.linux" ]; then
-  alias ssh=screen_ssh
-fi
+
+fix_ssh () {
+  sed -i -e '/$1/d' ~/.ssh/known_hosts
+  ssh-copy-id ~/.ssh/id_rsa $1
+}
