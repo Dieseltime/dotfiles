@@ -10,6 +10,8 @@ ohai () {
   green='\033[0;32m'
   NC='\033[0m'
   echo -e "${green}$1${NC}"
+  printf '%${#1}s\n' | tr ' ' -
+
 }
 
 if ! exists unzip ; then
