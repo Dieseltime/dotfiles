@@ -25,13 +25,3 @@ else
 fi
 
 ln -nfs "$HOME/.dotfiles/bash/.inputrc" "$HOME/.inputrc"
-
-# Install Dropbox
-if [ "$(uname -s)" == "Darwin" ]
-then
-  brew cask install dropbox
-else
-  cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
-fi
-
-sudo pip install thefuck

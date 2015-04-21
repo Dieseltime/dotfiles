@@ -455,6 +455,6 @@ for app in "Activity Monitor" "cfprefsd" "Dock" "Finder" "SystemUIServer"; do
   killall "${app}" > /dev/null 2>&1
 done
 
-# Homebrew Cask
+# Homebrew
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source "$dir/.cask"
+source "$dir/.brew"
