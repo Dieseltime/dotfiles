@@ -9,9 +9,9 @@ exists () {
 ohai () {
   green='\033[0;32m'
   NC='\033[0m'
+  echo -e "\n"
   echo -e "${green}$1${NC}"
-  printf '%${#1}s\n' | tr ' ' -
-
+  echo -e "${green}-------------------------------------------${NC}"
 }
 
 if ! exists unzip ; then
