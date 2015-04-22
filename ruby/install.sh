@@ -28,7 +28,7 @@ latest_ruby=$(ruby $dir/find_latest.rb)
 current_ruby=$(ruby -e 'print RUBY_VERSION')
 
 if [ "$latest_ruby" != "$current_ruby" ]; then
-  rbenv install $latest_ruby
+  rbenv install --skip-existing $latest_ruby
   rbenv global $latest_ruby
 fi
 
