@@ -2,9 +2,9 @@
 
 dotfiles_profile="${HOME}/.dotfiles/bash/.bashrc.sh"
 
-rm -rf $HOME/.bash_profile
 rm -rf $HOME/.profile
-rm -rf $HOME/.bashrc
+rm -rf $HOME/.bash_profile && touch $HOME/.bash_profile
+rm -rf $HOME/.bashrc && touch $HOME/.bashrc
 
 echo "[[ -s \"$dotfiles_profile\" ]] && source \"$dotfiles_profile\"" >> "$HOME/.bash_profile"
 

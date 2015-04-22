@@ -16,6 +16,6 @@ source $HOME/.dotfiles/bash/.bashrc.sh
 # Run installers
 for installer in `find $HOME/.dotfiles -maxdepth 2 -name install.sh`
 do
-  echo "Installing $installer"
+  echo "Running $installer"
   source $installer
 done
