@@ -2,6 +2,8 @@
 
 set +e
 
+unset -f direnv
+
 exists () {
   command -v "$1" &>/dev/null ;
 }

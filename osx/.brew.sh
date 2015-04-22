@@ -35,6 +35,7 @@ brew_install ack
 brew_install binutils
 brew_install colordiff
 brew_install diffutils
+brew_install direnv
 brew_install ed --default-names
 brew_install findutils --default-names
 brew_install gawk

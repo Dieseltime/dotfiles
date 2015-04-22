@@ -20,7 +20,7 @@ done
 unalias -a
 
 ## ALIASES
-for aliases in `find $HOME/.dotfiles -maxdepth 2 -name .aliases`
+for aliases in `find $HOME/.dotfiles -maxdepth 2 -name .aliases.sh`
 do
   source $aliases
 done
@@ -114,7 +114,7 @@ do
 done
 
 ## Z
-source $HOME/bin/z.sh >/dev/null 2>&1
+source $HOME/.dotfiles/bash/z.sh >/dev/null 2>&1
 
 ## HUB
 eval "$(hub alias -s)"

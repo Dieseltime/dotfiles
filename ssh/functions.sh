@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Add ssh key on while on a remote machine.
 copy_keys () {
   KEY=`cat $HOME/.ssh/id_rsa.pub`

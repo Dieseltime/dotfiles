@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 ##
 # Bash functions
 
@@ -35,14 +37,14 @@ pardonme () {
 }
 
 reload_profile () {
-  ohai "Reloading ~/.bash_profile ..."
-  source ~/.bash_profile
+  ohai "Reloading ~/.bashrc ..."
+  source ~/.bashrc
 }
 
 remote_bootstrap () {
   _ssh=$1
   _args=$2
-  remote_cmd="rm -rf .dotfiles .bashrc .bash_profile; touch .bash_profile; tar mx -C ~/; source .dotfiles/bash/.profile.sh; bootstrap"
+  remote_cmd="rm -rf .dotfiles .bashrc .bash_profile; touch .bash_profile; tar mx -C ~/; source .dotfiles/bash/.bashrc.sh; bootstrap"
   tar c -C${HOME} --exclude='.git' .dotfiles .ssh/id_rsa .ssh/id_rsa.pub | $_ssh $_args $remote_cmd
 }
 

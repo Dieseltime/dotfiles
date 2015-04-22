@@ -19,6 +19,10 @@ alias syslog="sudo tail -f /var/log/syslog"
 alias updategit="update_git"
 alias vpn="vip"
 
+# `cat` with beautiful colors. requires Pygments installed.
+#                  sudo easy_install -U Pygments
+alias c='pygmentize -O style=monokai -f console256 -g'
+
 if [ "$(uname -s)" == "Darwin" ]
 then
   ip () {

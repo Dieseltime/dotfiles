@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-dotfiles_profile="${HOME}/.dotfiles/bash/.profile.sh"
+dotfiles_profile="${HOME}/.dotfiles/bash/.bashrc.sh"
 
 rm -rf .profile
 rm -rf .bashrc
 
-if ! grep -q "[[ -s \"$dotfiles_profile\" ]] && source \"$dotfiles_profile\"" "$HOME/.bash_profile"; then
-  echo "[[ -s \"$dotfiles_profile\" ]] && source \"$dotfiles_profile\"" >> "$HOME/.bash_profile"
+if ! grep -q "[[ -s \"$dotfiles_profile\" ]] && source \"$dotfiles_profile\"" "$HOME/.bashrc"; then
+  echo "[[ -s \"$dotfiles_profile\" ]] && source \"$dotfiles_profile\"" >> "$HOME/.bashrc"
 fi
 
 touch "$HOME/.hushlogin"
