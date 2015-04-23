@@ -15,7 +15,7 @@ if ! command -v lpass >/dev/null 2>&1; then
     make
     sudo make install
   fi
-end
+fi
 
 if [ ! -s $HOME/.dotfiles/ssh/config ]; then
   mkdir -p $HOME/.ssh
@@ -23,7 +23,7 @@ if [ ! -s $HOME/.dotfiles/ssh/config ]; then
   ln -s $HOME/.dotfiles/ssh/config $HOME/.ssh/config
 fi
 
-if [ ! -f $HOME/.ssh/id_rsa ]
+if [ ! -f $HOME/.ssh/id_rsa ]; then
   lpass login vanhess@gmail.com
   lpass show --notes ssh-private-key > $HOME/.ssh/id_rsa
   lpass show --notes ssh-public-key > $HOME/.ssh/id_rsa.pub
