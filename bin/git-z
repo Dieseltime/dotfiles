@@ -3,10 +3,13 @@
 # Be lazy as fuck
 
 APPEND_BRANCH=true
+EMOJI=""
 
 while test $# -gt 0; do
   case "$1" in
-    -n=*|--no-append-branch=*) APPEND_BRANCH=false
+    -n|--no-branchname) APPEND_BRANCH=false
+      ;;
+    -e|--emoji) EMOJI="$(shuf -n 1 $HOME/.dotfiles/git/.emoji)"
       ;;
     *)
       ;;
@@ -18,7 +21,12 @@ git add -A .
 branchname=$(git describe --exact-match --tags 2> /dev/null || git rev-parse --abbrev-ref HEAD)
 
 message=$1
-if [ -z "{$message// }" ]; then
+
+if [ ! -z "${EMOJI// }" ]; then
+  message="$EMOJI"
+fi
+
+if [ -z "${message// }" ] && [ -z "${EMOJI// }" ]; then
   read -p "Enter a commit message: " message
 fi
 
