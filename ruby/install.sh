@@ -22,6 +22,8 @@ if ! [ -d "$HOME/.rbenv/plugins/ruby-build" ]; then
   git clone git://github.com/sstephenson/ruby-build.git "$HOME/.rbenv/plugins/ruby-build"
 fi
 
+source "$HOME/.bashrc"
+
 #latest_ruby=$(rbenv install -l | grep -E '^\s+[0-9].[0-9].[0-9](-p[0-9]{1,3})?$' | sort -n | tail -1 | sed -e 's/^[[:space:]]*//')
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 latest_ruby=$(ruby $dir/find_latest.rb)
