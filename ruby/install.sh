@@ -3,7 +3,7 @@
 # Install ruby
 if [ "$(uname -s)" == "Linux" ]; then
   sudo apt-get update
-  sudo apt-get -y --force-yes install ruby2.0 git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties
+  sudo apt-get -q -y --force-yes install ruby2.0 git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties
 fi
 
 if ! [ -d "$HOME/.rbenv" ]; then
