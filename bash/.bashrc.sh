@@ -105,7 +105,7 @@ fi
 if which rbenv >/dev/null 2>&1; then eval "$(rbenv init -)"; fi
 
 ## DIRENV
-if which direnv >/dev/null 2>&1; then eval "$(direnv hook $0)"; fi
+#if which direnv >/dev/null 2>&1; then eval "$(direnv hook $0)"; fi
 
 ## FUNCTIONS
 for functions in `find $HOME/.dotfiles -maxdepth 2 -name functions.sh`
