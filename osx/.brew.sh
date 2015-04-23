@@ -50,6 +50,7 @@ brew_install gnu-which --default-names
 brew_install gnutls --default-names
 brew_install grep --default-names
 brew_install gzip
+brew_install lastpass-cli --with-pinentry --with-doc
 brew_install rename
 brew_install screen
 brew_install tree
