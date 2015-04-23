@@ -128,3 +128,4 @@ export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" # GNU coreutils
 export PATH="/usr/local/sbin:$PATH"                         # Homebrew
 export PATH="/usr/local/bin:$PATH"                          # Homebrew
 export PATH="$HOME/bin:$PATH"                               # Custom binaries
+[[ -s "${HOME}/.dotfiles/git/functions.sh" ]] && source "${HOME}/.dotfiles/git/functions.sh"

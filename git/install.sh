@@ -31,7 +31,7 @@ if ! [ -f $HOME/.dotfiles/git/.gitconfig ]; then
     git_credential='osxkeychain'
   fi
 
-  sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" $HOME/.dotfiles/git/.gitconfig.sample > $HOME/.dotfiles/git/.gitconfig
+  sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" $HOME/.dotfiles/git/.gitconfig.sample.sh > $HOME/.dotfiles/git/.gitconfig
 fi
 
 if [ ! -s "$HOME/.gitconfig" ]; then

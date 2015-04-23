@@ -18,6 +18,8 @@ git add -A .
 branchname=$(git describe --exact-match --tags 2> /dev/null || git rev-parse --abbrev-ref HEAD)
 
 message=$1
+echo "Message is: "
+echo $message
 if [ -n "$message" ]; then
   read -p "Enter a commit message: " message
 fi
