@@ -15,8 +15,8 @@ if ! which brew >/dev/null 2>&1; then
 fi
 
 if [ "$(uname -s)" == "Linux" ]; then
-  sudo apt-get -y --force-yes install python-pip
-  sudo pip install mackup
+  sudo apt-get -qq -y --force-yes install python-pip
+  sudo pip install --quiet --upgrade mackup
 fi
 
 ln -nfs "$HOME/.dotfiles/bash/.inputrc" "$HOME/.inputrc"
