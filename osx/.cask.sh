@@ -29,3 +29,6 @@ brew cask install sublime-text
 brew cask install the-unarchiver
 brew cask install vagrant
 brew cask install virtualbox
+
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "$dir/st3/install.sh"

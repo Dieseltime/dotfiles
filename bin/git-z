@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# Be lazy as fuck
+
+APPEND_BRANCH=true
+
+while test $# -gt 0; do
+  case "$1" in
+    -n=*|--no-append-branch=*) APPEND_BRANCH=false
+      ;;
+    *)
+      ;;
+  esac
+  shift
+done
+
+git add -A .
+branchname=$(git describe --exact-match --tags 2> /dev/null || git rev-parse --abbrev-ref HEAD)
+
+message=$1
+if [ -n "$message" ]; then
+  read -p "Enter a commit message: " message
+fi
+
+if [ "$APPEND_BRANCH" = true ]; then
+  message="$message -- #$branchname"
+fi
+
+echo "Committing: $message"
+git commit -m "$message"
+git push origin $branchname
