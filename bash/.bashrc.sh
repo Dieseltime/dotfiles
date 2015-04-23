@@ -119,7 +119,7 @@ done
 source $HOME/.dotfiles/bash/z.sh >/dev/null 2>&1
 
 ## HUB
-eval "$(hub alias -s)"
+if which direnv >/dev/null 2>&1; then eval "$(hub alias -s)"; fi
 
 export MANPATH="#{opt_libexec}/gnuman:$MANPATH"
 
