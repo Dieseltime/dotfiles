@@ -24,3 +24,5 @@ sed -e '/direnv/ s/^#*//' -i "$HOME/.dotfiles/bash/.bashrc.sh" >/dev/null 2>&1
 
 echo -e "\nLoading .bashrc\n"
 source $HOME/.dotfiles/bash/.bashrc.sh
+
+echo "Done. Fuck you."
