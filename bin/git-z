@@ -2,40 +2,40 @@
 
 # Be lazy as fuck
 
-_APPEND_BRANCH=${GIT_Z_APPEND_BRANCH:-true}
-_EMOJI=${GIT_Z_EMOJI:-}
+BRANCH=${GIT_Z_APPEND_BRANCH:-true}
+EMOJI=${GIT_Z_EMOJI:-}
 
-while test $# -gt 0; do
-  case "$1" in
-    -n|--no-branchname) _APPEND_BRANCH=false
+while [[ $# > 1 ]]; do
+  key="$1"
+  case "$key" in
+    -n|--no-branchname) BRANCH=false
+      shift
       ;;
-    -e|--emoji) _EMOJI="$(shuf -n 1 $HOME/.dotfiles/git/.emoji)"
+    -e|--emoji) EMOJI="$(shuf -n 1 $HOME/.dotfiles/git/.emoji)"
+      shift
       ;;
     *)
       ;;
   esac
-  shift
 done
 
 git add -A .
-branchname=$(git describe --exact-match --tags 2> /dev/null || git rev-parse --abbrev-ref HEAD)
 
-message=$1
+MESSAGE=$1
 
-echo "_EMOJI is: ${_EMOJI}"
-
-if [ ! -z "${_EMOJI// }" ]; then
-  message="$_EMOJI"
+if [ -n "$EMOJI" ]; then
+  MESSAGE="$EMOJI"
 fi
 
-if [ -z "${message// }" ] && [ -z "${_EMOJI// }" ]; then
-  read -p "Enter a commit message: " message
+if [ -z "${MESSAGE// }" ] && [ -z "$EMOJI" ]; then
+  read -p "Enter a commit message: " MESSAGE
 fi
 
-if [ "$_APPEND_BRANCH" = true ]; then
-  message="$message -- #$branchname"
+if [ "$BRANCH" = true ]; then
+  BRANCH=$(git describe --exact-match --tags 2> /dev/null || git rev-parse --abbrev-ref HEAD)
+  MESSAGE="$MESSAGE -- #$BRANCH"
 fi
 
-echo "Committing: $message"
-git commit -m "$message"
-git push origin $branchname
+echo "Committing: $MESSAGE"
+git commit -m "$MESSAGE"
+git push origin $BRANCH
