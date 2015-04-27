@@ -27,4 +27,5 @@ if [ ! -f $HOME/.ssh/id_rsa ]; then
   lpass login vanhess@gmail.com
   lpass show --notes ssh-private-key > $HOME/.ssh/id_rsa
   lpass show --notes ssh-public-key > $HOME/.ssh/id_rsa.pub
+  chmod 0600 $HOME/.ssh/id_rsa
 fi

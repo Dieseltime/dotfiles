@@ -25,9 +25,11 @@ do
   source $aliases
 done
 
-if command -v gem >/dev/null 2>&1; then
-  alias deletegems="for i in `gem list --no-versions`; do gem uninstall -aIx $i; done"
-fi
+## FUNCTIONS
+for functions in `find $HOME/.dotfiles -maxdepth 2 -name functions.sh`
+do
+  source $functions
+done
 
 ## COLORS
 txtblk='\e[0;30m' # Black - Regular
@@ -40,7 +42,6 @@ txtcyn='\e[0;36m' # Cyan
 txtwht='\e[0;37m' # White
 
 ## EXPORTS
-
 export PROJECTS_DIR="$HOME/www"
 
 # History
@@ -57,7 +58,11 @@ export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 export DOCKER_HOST=tcp://$(boot2docker ip 2>/dev/null):2375
 
 # Editor
-export EDITOR=$(which subl 2>&1 || which vim)
+if is_osx? ; then
+  export EDITOR='subl'
+elif if_linux? ; then
+  export EDITOR='vim'
+fi
 
 # Timestamps for bash history
 HISTTIMEFORMAT='%F %T '
@@ -108,12 +113,6 @@ if which rbenv >/dev/null 2>&1; then eval "$(rbenv init -)"; fi
 
 ## DIRENV
 if which direnv >/dev/null 2>&1; then eval "$(direnv hook $0)"; fi
-
-## FUNCTIONS
-for functions in `find $HOME/.dotfiles -maxdepth 2 -name functions.sh`
-do
-  source $functions
-done
 
 ## Z
 source $HOME/.dotfiles/bash/z.sh >/dev/null 2>&1

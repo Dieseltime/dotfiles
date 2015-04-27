@@ -2,14 +2,14 @@
 
 # Be lazy as fuck
 
-APPEND_BRANCH=true
-EMOJI=""
+_APPEND_BRANCH=${GIT_Z_APPEND_BRANCH:-true}
+_EMOJI=${GIT_Z_EMOJI:-}
 
 while test $# -gt 0; do
   case "$1" in
-    -n|--no-branchname) APPEND_BRANCH=false
+    -n|--no-branchname) _APPEND_BRANCH=false
       ;;
-    -e|--emoji) EMOJI="$(shuf -n 1 $HOME/.dotfiles/git/.emoji)"
+    -e|--emoji) _EMOJI="$(shuf -n 1 $HOME/.dotfiles/git/.emoji)"
       ;;
     *)
       ;;
@@ -22,15 +22,17 @@ branchname=$(git describe --exact-match --tags 2> /dev/null || git rev-parse --a
 
 message=$1
 
-if [ ! -z "${EMOJI// }" ]; then
-  message="$EMOJI"
+echo "_EMOJI is: ${_EMOJI}"
+
+if [ ! -z "${_EMOJI// }" ]; then
+  message="$_EMOJI"
 fi
 
-if [ -z "${message// }" ] && [ -z "${EMOJI// }" ]; then
+if [ -z "${message// }" ] && [ -z "${_EMOJI// }" ]; then
   read -p "Enter a commit message: " message
 fi
 
-if [ "$APPEND_BRANCH" = true ]; then
+if [ "$_APPEND_BRANCH" = true ]; then
   message="$message -- #$branchname"
 fi
 

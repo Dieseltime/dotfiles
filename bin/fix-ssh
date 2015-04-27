@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+sed -i -e "/$1/d" ~/.ssh/known_hosts
+ssh-keyscan -H $1 >> ~/.ssh/known_hosts
+ssh-copy-id -i ~/.ssh/id_rsa $1

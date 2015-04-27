@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+is_osx? () {
+  [ "$(uname -s)" == "Darwin" ]
+}
+
+is_linux? () {
+  [ "$(uname -s)" == "Linux" ]
+}
+
 ##
 # Bash functions
 

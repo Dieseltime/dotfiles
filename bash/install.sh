@@ -10,7 +10,7 @@ echo "[[ -s \"$dotfiles_profile\" ]] && source \"$dotfiles_profile\"" >> "$HOME/
 
 touch "$HOME/.hushlogin"
 
-if [ "$(uname -s)" == "Linux" ]; then
+if is_linux? ; then
   sudo apt-get -qq -y --force-yes install python-pip
   sudo pip install --quiet --upgrade mackup
 fi

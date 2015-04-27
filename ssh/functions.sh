@@ -32,8 +32,3 @@ screen_ssh () {
   numargs=$#
   screen -t ${!numargs} ssh $@
 }
-
-fix_ssh () {
-  sed -i -e '/$1/d' ~/.ssh/known_hosts
-  ssh-copy-id ~/.ssh/id_rsa $1
-}
