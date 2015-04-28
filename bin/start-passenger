@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+require 'json'
+require 'open3'
+
+listening_ports  = `lsof -i -P | grep -i "listen" | grep -Eo ':[0-9]{1,5}' | uniq | cut -c 2-`.split
+passenger_config = ::JSON.load File.read("#{ENV['HOME']}/.passenger-config")
+
+(3000..3010).each do |port|
+  unless listening_ports.include?(port)
+    cmd = "passenger start -p #{port}"
+    Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
+      while line = stdout.gets
+        puts line
+      end
+    end
+  end
+end
