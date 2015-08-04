@@ -86,6 +86,9 @@ if command -v brew >/dev/null 2>&1; then
   source `brew --repository`/Library/Contributions/brew_bash_completion.sh
 fi
 
+# HOMEBREW CASK
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
 ## TAB COMPLETION
 set completion-ignore-case on
 set show-all-if-ambiguous on

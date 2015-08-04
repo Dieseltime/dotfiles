@@ -2,6 +2,9 @@ echo "Installing applications via homebrew cask ..."
 
 brew update && brew upgrade brew-cask && brew cleanup && brew cask cleanup
 brew install caskroom/cask/brew-cask
+brew tap caskroom/versions
+
+HOMEBREW_CASK_OPTS="--appdir=/Applications --force"
 
 brew cask install airmail-amt
 brew cask install angry-ip-scanner
@@ -25,7 +28,7 @@ brew cask install lastpass
 brew cask install lunchy
 brew cask install nmap
 brew cask install pgadmin3
-brew cask install sublime-text
+brew cask install sublime-text3
 brew cask install the-unarchiver
 brew cask install vagrant
 brew cask install virtualbox
