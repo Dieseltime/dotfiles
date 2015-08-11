@@ -125,7 +125,7 @@ if which direnv >/dev/null 2>&1; then eval "$(hub alias -s)"; fi
 
 export MANPATH="#{opt_libexec}/gnuman:$MANPATH"
 
-export PATH="/Users/svanhess/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin"
+export PATH="$HOME/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" # GNU coreutils
 export PATH="/usr/local/sbin:$PATH"                         # Homebrew
 export PATH="/usr/local/bin:$PATH"                          # Homebrew
