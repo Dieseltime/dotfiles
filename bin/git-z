@@ -38,5 +38,5 @@ if [ "$BRANCH" = true ]; then
 fi
 
 echo "Committing: $MESSAGE"
-# git commit -m "$MESSAGE"
-# git push origin $BRANCHNAME
+git commit -m "$MESSAGE"
+git push origin $BRANCHNAME
