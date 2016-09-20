@@ -17,8 +17,9 @@ if ! command -v lpass >/dev/null 2>&1; then
   fi
 fi
 
+mkdir -p $HOME/.ssh
+
 if [ ! -s $HOME/.dotfiles/ssh/config ]; then
-  mkdir -p $HOME/.ssh
   rm -rf $HOME/.ssh/config
   ln -s $HOME/.dotfiles/ssh/config $HOME/.ssh/config
 fi
