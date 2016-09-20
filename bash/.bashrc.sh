@@ -121,7 +121,7 @@ if which direnv >/dev/null 2>&1; then eval "$(direnv hook $0)"; fi
 source $HOME/.dotfiles/bash/z.sh >/dev/null 2>&1
 
 ## HUB
-if which direnv >/dev/null 2>&1; then eval "$(hub alias -s)"; fi
+if which hub >/dev/null 2>&1; then eval "$(hub alias -s)"; fi
 
 export MANPATH="#{opt_libexec}/gnuman:$MANPATH"
 
