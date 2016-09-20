@@ -82,8 +82,8 @@ export EC2_URL=https://ec2.us-west-1.amazonaws.com
 [[ -s /usr/local/etc/bash_completion ]] && source /usr/local/etc/bash_completion
 
 # HOMEBREW COMPLETION
-if command -v brew >/dev/null 2>&1; then
-  source `brew --repository`/Library/Contributions/brew_bash_completion.sh
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
 fi
 
 # HOMEBREW CASK
