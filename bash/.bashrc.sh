@@ -58,11 +58,7 @@ export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 export DOCKER_HOST=tcp://$(boot2docker ip 2>/dev/null):2375
 
 # Editor
-if is_osx? ; then
-  export EDITOR='subl'
-elif if_linux? ; then
-  export EDITOR='vim'
-fi
+export EDITOR='vim'
 
 # Timestamps for bash history
 HISTTIMEFORMAT='%F %T '
