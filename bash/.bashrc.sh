@@ -130,4 +130,7 @@ export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" # GNU coreutils
 export PATH="/usr/local/sbin:$PATH"                         # Homebrew
 export PATH="/usr/local/bin:$PATH"                          # Homebrew
 export PATH="$HOME/bin:$PATH"                               # Custom binaries
+
+# export PATH="$HOME/Qt5.7.0/5.7/clang_64/bin:$PATH"
+
 [[ -s "${HOME}/.dotfiles/git/functions.sh" ]] && source "${HOME}/.dotfiles/git/functions.sh"

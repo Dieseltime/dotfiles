@@ -59,6 +59,8 @@ brew_install watch
 brew_install wdiff --with-gettext
 brew_install wget
 brew_install mackup
+brew_install hub
+brew_install hookup
 
 echo 'Running `brew cleanup`...'
 brew cleanup
