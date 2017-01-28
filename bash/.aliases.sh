@@ -18,6 +18,9 @@ alias sourceit="reload_profile"
 alias syslog="sudo tail -f /var/log/syslog"
 alias updategit="update_git"
 alias vpn="vip"
+alias psgrep="ps aux | grep -v grep | grep"
+alias eachdir=". eachdir"
+alias ag='ag --path-to-agignore ~/.agignore'
 
 # `cat` with beautiful colors. requires Pygments installed.
 #                  sudo easy_install -U Pygments

@@ -9,3 +9,11 @@ deployment-config.json
 *~
 *.swp
 *.rbc
+.vscode
+bin/
+.agignore
+passenger.*
+ruby-lint.yml
+.reek
+*navigation_activity_report_spec.js.coffee
+.rspec

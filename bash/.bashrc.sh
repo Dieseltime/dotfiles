@@ -42,7 +42,7 @@ txtcyn='\e[0;36m' # Cyan
 txtwht='\e[0;37m' # White
 
 ## EXPORTS
-export PROJECTS_DIR="$HOME/www"
+export PROJECTS_DIR="$HOME/Code"
 
 # History
 export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
@@ -127,6 +127,6 @@ export PATH="/usr/local/sbin:$PATH"                         # Homebrew
 export PATH="/usr/local/bin:$PATH"                          # Homebrew
 export PATH="$HOME/bin:$PATH"                               # Custom binaries
 
-# export PATH="$HOME/Qt5.7.0/5.7/clang_64/bin:$PATH"
+export PATH="/usr/local/Cellar/qt5/5.7.0/bin:$PATH"
 
 [[ -s "${HOME}/.dotfiles/git/functions.sh" ]] && source "${HOME}/.dotfiles/git/functions.sh"

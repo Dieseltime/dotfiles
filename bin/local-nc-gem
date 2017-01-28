@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+bundle config disable_local_branch_check true
+bundle config local.care_management "${HOME}/Code/navigatingcare-components/care_management"
+bundle

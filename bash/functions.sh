@@ -47,6 +47,8 @@ pardonme () {
 reload_profile () {
   ohai "Reloading ~/.bashrc ..."
   source ~/.bashrc
+  ohai "Reloading ~/.bash_profile ..."
+  source ~/.bash_profile
 }
 
 remote_bootstrap () {
