@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source "${HOME}/.dotfiles/bash/colors.sh"
+
 is_osx? () {
   [ "$(uname -s)" == "Darwin" ]
 }
@@ -10,6 +12,63 @@ is_linux? () {
 
 ##
 # Bash functions
+
+start_timer () {
+  export SECONDS=0
+}
+
+stop_timer () {
+  local elapsed=$SECONDS
+  ohai "done" "Finished in $(print_elapsed $elapsed)"
+  export SECONDS=0
+}
+
+print_elapsed_short () {
+  local T=$1
+  local H=$((T/60/60%24))
+  local M=$((T/60%60))
+  local S=$((T%60))
+  (( $H > 0 )) && printf '%02d:' $H
+  printf '%02d:' $M
+  printf '%02d' $S
+}
+
+print_elapsed () {
+  local T=$1
+  local H=$((T/60/60%24))
+  local M=$((T/60%60))
+  local S=$((T%60))
+  (( $H > 0 )) && printf '%d hours ' $H
+  (( $M > 0 )) && printf '%d minutes ' $M
+  (( $H > 0 || $M > 0 )) && printf 'and '
+  printf '%d seconds' $S
+}
+
+comment_file () {
+  sed -i -e 's/^/#/' $1
+}
+
+uncomment_file () {
+  sed -i -e 's/^#//' $1
+}
+
+quietly () {
+  $@ 2>&1 >/dev/null
+}
+
+silently () {
+  echo "${@}"
+  $@ 2>&1 >/dev/null
+}
+
+ohai_silently () {
+  ohai
+}
+
+verbosely () {
+  echo "${@}"
+  $@
+}
 
 extract () {
   if [ -f $1 ] ; then
@@ -33,7 +92,19 @@ extract () {
 }
 
 ohai () {
-  printf "[ ${txtylw}${FUNCNAME[1]}${txtwht} ] ${txtgrn}$1${txtwht}\n"
+  if (( $# < 2 )); then
+    local tag="${FUNCNAME[1]}"
+    local msg="${1}"
+  else
+    local tag="${1}"
+    local msg="${2}"
+  fi
+  printf "[ ${txtylw}${tag}${txtwht} ] ${txtgrn}$msg${txtwht}\n"
+}
+
+ohai_time () {
+  local elapsed=$SECONDS
+  ohai "$(print_elapsed_short $elapsed)" "${1}"
 }
 
 ohno () {

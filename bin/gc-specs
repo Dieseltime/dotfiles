@@ -1,0 +1,97 @@
+#!/usr/bin/env bash
+
+source "${HOME}/.dotfiles/bash/functions.sh"
+source "${HOME}/.dotfiles/ruby/functions.sh"
+
+setup_ruby_gc_exports
+
+INSTANCE_COUNT=${INSTANCE_COUNT:-8}
+
+unset RAILS_ENV
+
+declare -a skip_me=(
+  "${HOME}/Code/gc/spec/acceptance/clinic/messaging_settings.feature"
+  "${HOME}/Code/gc/spec/acceptance/message_threads/staff_permissions.feature"
+  "${HOME}/Code/gc/spec/acceptance/message_threads/staff_show.feature"
+  "${HOME}/Code/gc/spec/acceptance/message_threads/new.feature"
+)
+
+dump () {
+  silently bundle exec rake db:test:prepare
+  mysqldump -uroot --no-create-info --skip-triggers navcan_test --ignore-table=navcan_test.schema_migrations > navcan_test.sql
+}
+
+load () {
+  db="navcan_test$1"
+  ohai "Loading test data into $db ..."
+  mysql -uroot $db < navcan_test.sql
+}
+
+quiet_rake () {
+  quietly bundle exec rake $@
+}
+
+# _term() {
+#   echo "Caught SIGTERM signal!"
+#   kill -TERM "$child" 2>/dev/null
+# }
+
+# trap _term SIGTERM
+
+# echo "Doing some initial work...";
+# /bin/start/main/server --nodaemon &
+
+# child=$!
+# wait "$child"
+
+for file in "${skip_me[@]}"; do comment_file "${file}"; done
+
+gc_specs () {
+  start_timer
+
+  bundle check || bundle
+
+  ohai_time "Using $INSTANCE_COUNT processes ..."
+
+  ohai_time "Running rake db:migrate ..."
+  quiet_rake db:migrate
+
+  ohai_time "Running rake parallel:drop ..."
+  quiet_rake parallel:drop[$INSTANCE_COUNT]
+
+  ohai_time "Running rake parallel:create ..."
+  quiet_rake parallel:create[$INSTANCE_COUNT]
+
+  ohai_time "Running rake parallel:load_schema ..."
+  quiet_rake parallel:load_schema[$INSTANCE_COUNT]
+
+  if [ ! -f navcan_test.sql ]; then
+    ohai_time "No test data found. Regenerating ..."
+    dump
+  else
+    load || {
+      ohai_time "Couldn't load test data. Regenerating ..."
+      dump
+    }
+  fi
+
+  ohai_time "Populating remaining $(expr $INSTANCE_COUNT - 1) test databases ..."
+  for i in $(seq 2 $INSTANCE_COUNT); do load $i; done
+
+
+  # ohai "Running specs ..."
+  # verbosely bundle exec parallel_rspec -n $INSTANCE_COUNT --suffix '(test\.rb|spec\.rb|\.feature)$' -- -r turnip/rspec -- spec
+
+  # ohai "Reloading first database ..."
+  # silently bundle exec rake db:schema:load
+  # load
+
+  # ohai "Running features ..."
+  # verbosely bundle exec rake parallel:features[$INSTANCE_COUNT]
+
+  stop_timer
+}
+
+gc_specs
+
+for file in "${skip_me[@]}"; do uncomment_file "${file}"; done

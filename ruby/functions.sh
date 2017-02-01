@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
 
+setup_ruby_gc_exports () {
+  export RUBY_GC_MALLOC_LIMIT=1000000000
+  export RUBY_FREE_MIN=500000
+  export RUBY_HEAP_MIN_SLOTS=40000
+  export RUBY_GC_HEAP_INIT_SLOTS=1000000
+  export RUBY_GC_HEAP_FREE_SLOTS=500000
+  export RUBY_GC_HEAP_GROWTH_FACTOR=1.1
+  export RUBY_GC_HEAP_GROWTH_MAX_SLOTS=10000000
+  export RUBY_GC_MALLOC_LIMIT_MAX=1000000000
+  export RUBY_GC_MALLOC_LIMIT_GROWTH_FACTOR=1.1
+}
+
 install_rbenv () {
   install_git
 

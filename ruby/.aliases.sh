@@ -4,7 +4,6 @@ alias pstop="stop-passenger"
 alias passenger-stop="stop-passenger"
 alias engine-spec="run_engine_spec"
 alias engine-specs="run_all_engine_specs"
-alias gc-specs="gc_specs"
 alias date-test="date_test"
 alias date-reset="date_reset"
 
@@ -50,31 +49,6 @@ stop_timer () {
   else
     ohai "Finished in $(($duration % 60)) seconds."
   fi
-}
-
-gc_specs () {
-  setup_ruby_gc_exports
-
-  declare -a skip_me=(
-    "spec/acceptance/clinic/messaging_settings.feature"
-    "spec/acceptance/message_threads/staff_permissions.feature"
-    "spec/acceptance/message_threads/staff_show.feature"
-    "spec/acceptance/message_threads/new.feature"
-  )
-
-  for file in "${skip_me[@]}"
-  do
-    comment_file "$HOME/Code/gc/${file}"
-  done
-
-  cd "$HOME/Code/gc" && ./faster_parallel_test.sh
-
-  for file in "${skip_me[@]}"
-  do
-    uncomment_file "$HOME/Code/gc/${file}"
-  done
-
-  stop_timer
 }
 
 run_engine_spec () {
