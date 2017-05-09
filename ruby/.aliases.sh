@@ -54,10 +54,14 @@ stop_timer () {
 run_engine_spec () {
   setup_ruby_gc_exports
 
+  # echo 'Thin::Logging.silent = true' >> $PWD/spec/dummy/config/environments/test.rb
+
   ohai "Running specs for $(basename $PWD)"
   echo ""
 
   export NO_SIMPLE_COV=true
+  export DRB=true
+  rm -rf ./coverage
 
   bundle check || bundle
 
@@ -72,17 +76,19 @@ run_engine_spec () {
 
   if [ -d "$PWD/spec/javascripts" ]; then
     # ignore this google charts spec for now
-    if [[ "$PWD" =~ patient_mgmt ]]; then
-      comment_file "$PWD/spec/javascripts/patient_mgmt/views/navigation_activity_report_spec.js.coffee"
-    fi
+    # if [[ "$PWD" =~ patient_mgmt ]]; then
+    #   comment_file "$PWD/spec/javascripts/patient_mgmt/views/navigation_activity_report_spec.js.coffee"
+    # fi
 
     silently bundle exec rake app:tmp:clear
     verbosely bundle exec rake app:konacha:run
 
-    if [[ "$PWD" =~ patient_mgmt ]]; then
-      uncomment_file "$PWD/spec/javascripts/patient_mgmt/views/navigation_activity_report_spec.js.coffee"
-    fi
+    # if [[ "$PWD" =~ patient_mgmt ]]; then
+    #   uncomment_file "$PWD/spec/javascripts/patient_mgmt/views/navigation_activity_report_spec.js.coffee"
+    # fi
   fi
+
+  # sed -i -e '/^Thin::Logging.silent = true/d' "$PWD/spec/dummy/config/environments/test.rb"
 
   echo ""
 }

@@ -5,7 +5,7 @@ source "${HOME}/.dotfiles/ruby/functions.sh"
 
 setup_ruby_gc_exports
 
-INSTANCE_COUNT=${INSTANCE_COUNT:-8}
+INSTANCE_COUNT=${INSTANCE_COUNT:-4}
 
 unset RAILS_ENV
 
@@ -23,7 +23,6 @@ dump () {
 
 load () {
   db="navcan_test$1"
-  ohai "Loading test data into $db ..."
   mysql -uroot $db < navcan_test.sql
 }
 
@@ -31,64 +30,59 @@ quiet_rake () {
   quietly bundle exec rake $@
 }
 
-# _term() {
-#   echo "Caught SIGTERM signal!"
-#   kill -TERM "$child" 2>/dev/null
-# }
-
-# trap _term SIGTERM
-
-# echo "Doing some initial work...";
-# /bin/start/main/server --nodaemon &
-
-# child=$!
-# wait "$child"
-
 for file in "${skip_me[@]}"; do comment_file "${file}"; done
 
 gc_specs () {
   start_timer
 
+  echo 'Thin::Logging.silent = true' >> config/environments/test.rb
+
+  gem uninstall rspec rspec-core -aIx
   bundle check || bundle
 
-  ohai_time "Using $INSTANCE_COUNT processes ..."
+  ohai_time "Crushing it with $INSTANCE_COUNT processes ..."
 
-  ohai_time "Running rake db:migrate ..."
-  quiet_rake db:migrate
+  if [ "$1" != "--skip-db" ]; then
+    ohai_time "Running rake db:migrate ..."
+    quiet_rake db:migrate
 
-  ohai_time "Running rake parallel:drop ..."
-  quiet_rake parallel:drop[$INSTANCE_COUNT]
+    ohai_time "Running rake parallel:drop ..."
+    quiet_rake parallel:drop[$INSTANCE_COUNT]
 
-  ohai_time "Running rake parallel:create ..."
-  quiet_rake parallel:create[$INSTANCE_COUNT]
+    ohai_time "Running rake parallel:create ..."
+    quiet_rake parallel:create[$INSTANCE_COUNT]
 
-  ohai_time "Running rake parallel:load_schema ..."
-  quiet_rake parallel:load_schema[$INSTANCE_COUNT]
+    ohai_time "Running rake parallel:load_schema ..."
+    quiet_rake parallel:load_schema[$INSTANCE_COUNT]
 
-  if [ ! -f navcan_test.sql ]; then
-    ohai_time "No test data found. Regenerating ..."
-    dump
-  else
-    load || {
-      ohai_time "Couldn't load test data. Regenerating ..."
+    # Delete test data if more than 1 day old
+    find navcan_test.sql -mmin +1440 -delete
+
+    if [ ! -f navcan_test.sql ]; then
+      ohai_time "No test data found. Regenerating ..."
       dump
-    }
+    else
+      load || {
+        ohai_time "Couldn't load test data. Regenerating ..."
+        dump
+      }
+    fi
+
+    ohai_time "Populating remaining $(expr $INSTANCE_COUNT - 1) test databases ..."
+    for i in $(seq 2 $INSTANCE_COUNT); do load $i; done
   fi
 
-  ohai_time "Populating remaining $(expr $INSTANCE_COUNT - 1) test databases ..."
-  for i in $(seq 2 $INSTANCE_COUNT); do load $i; done
+  ohai_time "Running parallel_rspec ..."
+  verbosely bundle exec parallel_rspec -n $INSTANCE_COUNT --suffix '(test\.rb|spec\.rb|\.feature)$' -- -r turnip/rspec -- spec
 
+  ohai_time "Reloading first database ..."
+  silently bundle exec rake db:schema:load
+  load
 
-  # ohai "Running specs ..."
-  # verbosely bundle exec parallel_rspec -n $INSTANCE_COUNT --suffix '(test\.rb|spec\.rb|\.feature)$' -- -r turnip/rspec -- spec
+  ohai_time "Running rake parallel:features ..."
+  verbosely bundle exec rake parallel:features[$INSTANCE_COUNT]
 
-  # ohai "Reloading first database ..."
-  # silently bundle exec rake db:schema:load
-  # load
-
-  # ohai "Running features ..."
-  # verbosely bundle exec rake parallel:features[$INSTANCE_COUNT]
-
+  sed -i -e '/^Thin::Logging.silent = true/d' "${HOME}/Code/gc/config/environments/test.rb"
   stop_timer
 }
 
