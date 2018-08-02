@@ -41,9 +41,6 @@ txtpur='\e[0;35m' # Purple
 txtcyn='\e[0;36m' # Cyan
 txtwht='\e[0;37m' # White
 
-## EXPORTS
-export PROJECTS_DIR="$HOME/Code"
-
 # History
 export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
 export HISTSIZE=100000                   # big big history
@@ -54,9 +51,6 @@ export MANPAGER="less -X"
 export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}: ${PWD/#$HOME/~}\007"'
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
-# Docker
-export DOCKER_HOST=tcp://$(boot2docker ip 2>/dev/null):2375
-
 # Editor
 export EDITOR='vim'
 
@@ -66,12 +60,6 @@ export HISTTIMEFORMAT
 
 # Make some commands not show up in history
 export HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help"
-
-# AWS
-export JAVA_HOME=`/usr/libexec/java_home 2>&1`
-export EC2_HOME=$HOME/bin/ec2
-source $HOME/.ssh/ec2-credentials >/dev/null 2>&1
-export EC2_URL=https://ec2.us-west-1.amazonaws.com
 
 ## BASH COMPLETION
 [[ -s /etc/bash_completion ]] && source /etc/bash_completion
@@ -110,15 +98,6 @@ fi
 ## RBENV
 if which rbenv >/dev/null 2>&1; then eval "$(rbenv init -)"; fi
 
-## DIRENV
-if which direnv >/dev/null 2>&1; then eval "$(direnv hook $0)"; fi
-
-## Z
-source $HOME/.dotfiles/bash/z.sh >/dev/null 2>&1
-
-## HUB
-if which hub >/dev/null 2>&1; then eval "$(hub alias -s)"; fi
-
 export MANPATH="#{opt_libexec}/gnuman:$MANPATH"
 
 export PATH="$HOME/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
@@ -126,7 +105,5 @@ export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" # GNU coreutils
 export PATH="/usr/local/sbin:$PATH"                         # Homebrew
 export PATH="/usr/local/bin:$PATH"                          # Homebrew
 export PATH="$HOME/bin:$PATH"                               # Custom binaries
-
-export PATH="/usr/local/Cellar/qt5/5.7.0/bin:$PATH"
 
 [[ -s "${HOME}/.dotfiles/git/functions.sh" ]] && source "${HOME}/.dotfiles/git/functions.sh"
