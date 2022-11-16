@@ -31,42 +31,38 @@ brew_install bash-completion
 brew_install coreutils          # GNU core utilities (those that come with OS X are outdated)
 brew_install findutils          # GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
 brew_install wget --enable-iri  # wget with internationalized URI (IRI) support
-
-brew tap homebrew/dupes
-brew install homebrew/dupes/grep
-
+brew_install grep
 brew_install ack
 brew_install binutils
 brew_install colordiff
 brew_install diffutils
 brew_install direnv
-brew_install ed --default-names
-brew_install findutils --default-names
+brew_install ed
+brew_install findutils
 brew_install gawk
-brew_install gnu-indent --default-names
-brew_install gnu-sed --default-names
-brew_install gnu-tar --default-names
-brew_install gnu-which --default-names
-brew_install gnutls --default-names
-brew_install grep --default-names
+brew_install gnu-indent
+brew_install gnu-sed
+brew_install gnu-tar
+brew_install gnu-which
+brew_install gnutls
+brew_install grep
 brew_install gzip
-brew_install lastpass-cli --with-pinentry --with-doc
+brew_install lastpass-cli
 brew_install man2html
 brew_install rename
 brew_install screen
 brew_install tree
 brew_install watch
-brew_install wdiff --with-gettext
+brew_install wdiff
 brew_install wget
 brew_install mackup
 brew_install hub
-brew_install hookup
 brew_install fpp
 
 echo 'Running `brew cleanup`...'
 brew cleanup
 
-dotfiles_profile="${HOME}/.dotfiles/bash/.profile.sh"
+dotfiles_profile="${HOME}/.dotfiles/bash/.bashrc.sh"
 
 if ! grep -q "PATH=\"/usr/local/opt/coreutils/libexec/gnubin:\$PATH\"" "${dotfiles_profile}" ; then
   echo "PATH=\"/usr/local/opt/coreutils/libexec/gnubin:\$PATH\"" >> "${dotfiles_profile}"
