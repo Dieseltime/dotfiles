@@ -107,3 +107,5 @@ export PATH="/usr/local/bin:$PATH"                          # Homebrew
 export PATH="$HOME/bin:$PATH"                               # Custom binaries
 
 [[ -s "${HOME}/.dotfiles/git/functions.sh" ]] && source "${HOME}/.dotfiles/git/functions.sh"
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
