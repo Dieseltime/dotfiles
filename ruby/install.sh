@@ -7,7 +7,7 @@ if [ "$(uname -s)" == "Linux" ]; then
 fi
 
 if ! [ -d "$HOME/.rbenv" ]; then
-  git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
+  brew install rbenv ruby-build
 fi
 
 if ! grep -q 'export PATH="$HOME/.rbenv/bin:$PATH"' "$HOME/.bashrc"; then
@@ -16,10 +16,6 @@ fi
 
 if ! grep -q 'eval "$(rbenv init -)"' "$HOME/.bashrc"; then
   echo 'eval "$(rbenv init -)"' >> "$HOME/.bashrc"
-fi
-
-if ! [ -d "$HOME/.rbenv/plugins/ruby-build" ]; then
-  git clone git://github.com/sstephenson/ruby-build.git "$HOME/.rbenv/plugins/ruby-build"
 fi
 
 source "$HOME/.bashrc"
