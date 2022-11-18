@@ -58,6 +58,7 @@ brew_install wget
 brew_install mackup
 brew_install hub
 brew_install fpp
+brew_install ag
 
 echo 'Running `brew cleanup`...'
 brew cleanup
